@@ -1,0 +1,22 @@
+export const productList = [
+    "Electronics",
+    "Clothing",
+    "Home Appliances",
+    "Furniture",
+    "Beauty Products",
+    "Sports & Outdoors",
+    "Toys & Games",
+    "Books",
+    "Automotive",
+    "Kitchenware",
+    "Jewelry & Watches",
+    "Health & Wellness",
+    "Office Supplies",
+    "Pet Supplies",
+    "Gardening",
+    "Arts & Crafts",
+    "Musical Instruments",
+    "Travel & Luggage",
+    "Home Improvement",
+    "Baby Products"
+];
