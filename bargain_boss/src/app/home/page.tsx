@@ -6,9 +6,13 @@ import { Suspense, useState } from "react";
 import Loading from "../loading";
 
 const Page = () => {
-    const [resultList, setResultList] = useState<{ name: string; price: number; image: string; link: string }[]>([]);
+    const [resultList, setResultList] = useState<{ name: string; price: number; image: string; link: string; from : string }[]>([]);
+    const [fetchRes, setFetchRes] = useState<string>('');
     const handleClick = async (param: string) => {
-        const response: { name: string; price: number; image: string; link: string }[] = await fetch(`http://localhost:5500/products/${param}`, {
+        if(fetchRes === param) {
+            return;
+        }
+        const response: { name: string; price: number; image: string; link: string ; from : string }[] = await fetch(`http://localhost:5500/products/${param}`, {
             method: 'GET',
         }).then(res => {
             console.log(res);
@@ -24,7 +28,10 @@ const Page = () => {
                 <div className="w-52 h-lvh overflow-y-scroll flex flex-col gap-2">
                     {
                         productList.map((product, index) => <label htmlFor={index.toString()}>
-                            <div className="button-check w-full px-2 py-3 shadow-inner shadow-gray-400 rounded font-bold cursor-pointer active:bg-green-800 active:text-green-50" onClick={() => handleClick(product)}>
+                            <div className="button-check w-full px-2 py-3 shadow-inner shadow-gray-400 rounded font-bold cursor-pointer active:bg-green-800 active:text-green-50" onClick={() => {
+                                handleClick(product);
+                                setFetchRes(product);
+                            }}>
                                 <input type="radio" name="product" className="hidden" id={`${index}`} />
                                 <h2>{product}</h2>
                             </div>
@@ -35,7 +42,7 @@ const Page = () => {
                     width: "calc( 100lvw - 13rem )"
                 }}>
                     <Suspense fallback={<Loading />}>
-                    {resultList.map(product => <Card name={product.name} price={product.price} image={product.image} link={product.link} />)}
+                    {resultList.map(product => <Card name={product.name} price={product.price} image={product.image} link={product.link} from={product.from}/>)}
                     </Suspense>
                 </div>
             </div>

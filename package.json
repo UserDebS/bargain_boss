@@ -1,0 +1,6 @@
+{
+    "scripts" : {
+        "next" : "cd bargain_boss && npm run dev",
+        "server" : "cd bargain_boss_server && nodemon server.cjs"
+    }
+}
